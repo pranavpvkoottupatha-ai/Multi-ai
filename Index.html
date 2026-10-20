@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101525">
+<title>NOVA AI — Multi-AI Assistant</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101525;color:#f5f7ff;
+font-family:system-ui,Arial,sans-serif}
+main{max-width:850px;margin:auto;padding:22px}
+header{text-align:center;padding:22px 0}
+.logo{font-size:42px;font-weight:850;color:#9eafff}
+p{color:#b7c0d9;line-height:1.5}
+.panel{background:#192137;border:1px solid #303b57;
+border-radius:16px;padding:18px;margin:16px 0}
+textarea{width:100%;min-height:130px;resize:vertical;
+padding:14px;border-radius:12px;border:1px solid #475573;
+background:#101525;color:white;font:inherit}
+button{border:0;border-radius:10px;padding:12px 16px;
+font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#8195ff;color:#101525;width:100%;margin-top:12px}
+.providers{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.provider{background:#222d46;padding:12px;border-radius:10px}
+.results{white-space:pre-wrap;overflow-wrap:anywhere}
+.status{color:#9eafff}
+small{color:#aeb8d1}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="logo">✦ NOVA AI</div>
+<p>One task. Multiple AIs. One conclusion.</p>
+</header>
+
+<section class="panel">
+<h2>What do you want to accomplish?</h2>
+<textarea id="task" placeholder="Describe your task here..."></textarea>
+<h3>AI providers</h3>
+<div class="providers">
+<label class="provider"><input type="checkbox" checked disabled> GPT</label>
+<label class="provider"><input type="checkbox" checked disabled> Gemini</label>
+<label class="provider"><input type="checkbox" checked disabled> Perplexity</label>
+<label class="provider"><input type="checkbox" checked disabled> Claude</label>
+</div>
+<p><small>Providers will be enabled as their integrations are connected.</small></p>
+<button class="primary" id="run">Analyze my task</button>
+<p class="status" id="status" role="status">Ready</p>
+</section>
+
+<section class="panel">
+<h2>AI responses</h2>
+<div id="responses" class="results">Your provider responses will appear here.</div>
+</section>
+
+<section class="panel">
+<h2>✦ Final conclusion</h2>
+<div id="conclusion" class="results">Your combined conclusion will appear here.</div>
+</section>
+</main>
+<script>
+const task = document.getElementById("task");
+const status = document.getElementById("status");
+document.getElementById("run").addEventListener("click", () => {
+  if (!task.value.trim()) {
+    status.textContent = "Please enter a task first.";
+    task.focus();
+    return;
+  }
+  status.textContent =
+    "Interface ready. Backend and provider connections are not configured yet.";
+  document.getElementById("responses").textContent =
+    "No AI requests have been sent.";
+  document.getElementById("conclusion").textContent =
+    "Connect the secure backend and AI providers to generate a real conclusion.";
+});
+</script>
+</body>
+</html>
